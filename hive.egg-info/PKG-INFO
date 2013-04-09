@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: hive
+Version: 0.0.1dev
+Summary: manmage hive table
+Home-page: http://www.timger.info/about
+Author: timger
+Author-email: yishenggudou@gmail.com
+License: MIT
+Description: manage hive table
+Keywords: hive thrift
+Platform: UNKNOWN
