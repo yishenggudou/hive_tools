@@ -38,6 +38,9 @@ def parse_args():
                    )
     p.add_argument('-P', '--port', type=int,
                    help="hive Server's Port, default use conf")
+    p.add_argument('action', type=str,
+                   default='load',
+                   help="load|drop")
     return p
 
 
@@ -46,11 +49,14 @@ def main():
     p = parse_args()
     args = p.parse_args()
     datetime.datetime.strptime(args.datetime, args.DATEFORMAT)
-    print args.DATEFORMAT, args.datetime
+    #print args.DATEFORMAT, args.datetime
     t = Table(args.hivetable, args.host, args.port)
-    t.load_from_dir(args.pathformat,
-                    args.datetime,
-                    args.parition)
+    if args.action == 'load':
+        t.load_from_dir(args.pathformat,
+                        args.datetime,
+                        args.parition)
+    elif args.action == "drop":
+        print "drop"
 
 if __name__ == '__main__':
     main()

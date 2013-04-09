@@ -17,12 +17,6 @@ __version__ = (0, 0, 0)
 
 
 """
-.. module:: useful_1
-   :platform: Unix, Windows
-   :synopsis: A useful module indeed.
-
-.. moduleauthor:: Andrew Carter <andrew@invalid.com>
-
 
 """
 
@@ -40,7 +34,6 @@ class Table(Hive):
 
     def render_time_str(self, str_format, ptime):
         import re
-        print str_format, ' ',ptime
         ptime = self.ptime(ptime)
         args = re.findall('(\{[\s\S]*?\})', str_format)
         for p in args:
@@ -49,7 +42,6 @@ class Table(Hive):
         return str_format
 
     def load_from_dir(self, dir_format, ptime, partition={}):
-        print "partition",partition
         if type(partition) == dict:
             _ = ["{0}='{1}'".format(*i) for i in partition.items()]
             partition = " ".join(_)
@@ -69,7 +61,7 @@ class Table(Hive):
                            table=self.tablename,
                            partition=partition_str)
         print ">>>:", hsql
-        return 
+        return
         resutes = self._exec(hsql)
         for l in resutes:
             print l

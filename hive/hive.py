@@ -77,5 +77,4 @@ class Hive(object):
         import datetime
         if hasattr(self, 'dateformat') and self.dateformat:
             date_format = self.dateformat
-        print date_str, date_format
         return datetime.datetime.strptime(date_str, date_format)
