@@ -1,5 +1,4 @@
-hive_tools
-==========
+###hive_tools
 
 hive tools 一些hive批处理操作库
 
@@ -12,11 +11,14 @@ python setup.py install
 ```
 
 ```
-timgers-MacBook-Air:hive timger$ python scripts/hiveload.py -h
-usage: hiveload.py [-h] [-F DATEFORMAT] [-d DATETIME] -f PATHFORMAT -t
-                   HIVETABLE -p PARITION [-H HOST] [-P PORT]
+usage: hiveload.py [-h] [-F DATEFORMAT] [-d DATETIME] [-f PATHFORMAT] -t
+                   HIVETABLE [-p PARITION] [-H HOST] [-r REDUCE] [-P PORT]
+                   action
 
 hivetool: hive command tool.
+
+positional arguments:
+  action                load|drop
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -24,7 +26,8 @@ optional arguments:
                         use dateformat parse datetime obj,default:%Y%m%d%H%M
   -d DATETIME, --datetime DATETIME
                         the datetime map to url,default is
-                        datetime.datetime.now()
+                        datetime.datetime.now() you can use [1d|2d|3d|nd...]
+                        [1h|2h|3h|nh...]
   -f PATHFORMAT, --pathformat PATHFORMAT
                         the file path in hadoop
                         like:/qlog/logs/{%Y}/{%Y%m}/{%Y%m%d}/{%Y%m%d%H}/*
@@ -33,6 +36,8 @@ optional arguments:
   -p PARITION, --parition PARITION
                         hive table parition:day='{%Y%m%d}',hour='{%Y%m%d%h}'
   -H HOST, --host HOST  hive Server's Host default use conf
+  -r REDUCE, --reduce REDUCE
+                        reduce datetime range:[day|am|pm]
   -P PORT, --port PORT  hive Server's Port, default use conf
 ```
 
