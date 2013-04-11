@@ -15,7 +15,7 @@ DIR_PATH = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 NAME_FILE = os.path.relpath(__file__)
 CONF_NAME = 'hiveconf.yaml'
 
-CONF_DIRS = [DIR_PATH, '/etc/', '/user/local/etc/']
+CONF_DIRS = [DIR_PATH, '/etc/', '/usr/local/etc/']
 
 
 def get_conf():
@@ -23,6 +23,7 @@ def get_conf():
         cp = os.path.join(P, CONF_NAME)
         if os.path.isfile(cp):
             conf = yaml.load(open(cp))
+            print "use conf file", os.path.abspath(cp)
             return conf
         else:
             print "conf not find in:", cp

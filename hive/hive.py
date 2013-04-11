@@ -40,10 +40,11 @@ class Hive(object):
 
     def __init__(self,
                  host=conf['hive']['host'],
-                 port=conf['hive']['host']):
+                 port=conf['hive']['port']):
         self._client(host, port)
 
     def _client(self, host, port):
+        print ">>> connect hive thrift server", host, ':', port
         self.transport = TSocket.TSocket(host, port)
         self.transport = TTransport.TBufferedTransport(self.transport)
         self.protocol = TBinaryProtocol.TBinaryProtocol(self.transport)
@@ -75,6 +76,9 @@ class Hive(object):
         u"""
         """
         import datetime
+        date_str = (date_str + '0'*10)[:12]
         if hasattr(self, 'dateformat') and self.dateformat:
             date_format = self.dateformat
-        return datetime.datetime.strptime(date_str, date_format)
+        k = datetime.datetime.strptime(date_str, date_format)
+        print ">>> parse ptime", date_str, date_format, k
+        return k

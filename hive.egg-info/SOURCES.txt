@@ -1,9 +1,13 @@
 setup.cfg
 setup.py
 hive/__init__.py
+hive/conf.py
+hive/hive.py
+hive/table.py
 hive.egg-info/PKG-INFO
 hive.egg-info/SOURCES.txt
 hive.egg-info/dependency_links.txt
 hive.egg-info/entry_points.txt
 hive.egg-info/not-zip-safe
 hive.egg-info/top_level.txt
+scripts/hiveload.py

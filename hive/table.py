@@ -25,11 +25,13 @@ class Table(Hive):
 
     def __init__(self, table, host=None, port=None, dateformat=None):
         if host and port:
-            super(Table, self).__init__(self, host=host, port=port)
+            super(Table, self).__init__(host=host, port=port)
         elif host:
-            super(Table, self).__init__(self, host=host)
+            super(Table, self).__init__(host=host)
         elif port:
-            super(Table, self).__init__(self, port=port)
+            super(Table, self).__init__(port=port)
+        else:
+            super(Table, self).__init__()
         self.tablename = table
 
     def render_time_str(self, str_format, ptime):
@@ -61,8 +63,11 @@ class Table(Hive):
                            table=self.tablename,
                            partition=partition_str)
         print ">>>:", hsql
-        return
+        #return
         resutes = self._exec(hsql)
+        if resutes is None:
+            print "No Retuen Row"
+            return 
         for l in resutes:
             print l
         if resutes:
