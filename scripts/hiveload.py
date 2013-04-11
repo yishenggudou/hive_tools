@@ -23,7 +23,10 @@ def parse_args():
                    help="use dateformat parse datetime obj,default:%%Y%%m%%d%%H%%M")
     p.add_argument('-d', '--datetime', type=str,
                    default=datetime.datetime.now().strftime('%Y%m%d%H%M'),
-                   help="the datetime map to url,default is datetime.datetime.now()")
+                   help="the datetime map to url,default is datetime.datetime.now()\
+                         you can use [1d|2d|3d|nd...]\
+                         [1h|2h|3h|nh...]\
+                        ")
     p.add_argument('-f', '--pathformat', type=str,
                    help="the file path in hadoop like:/qlog/logs/{%%Y}/{%%Y%%m}/{%%Y%%m%%d}/{%%Y%%m%%d%%H}/*")
     p.add_argument('-t', '--hivetable', type=str,
@@ -49,9 +52,17 @@ def main():
     from hive.table import Table
     p = parse_args()
     args = p.parse_args()
-    datetime.datetime.strptime(args.datetime, args.DATEFORMAT)
     #print args.DATEFORMAT, args.datetime
     t = Table(args.hivetable, args.host, args.port)
+    now = datetime.datetime.now()
+    if args.datetime.endswith('d'):
+        date_step = int(args.datetime.strip('d'))
+        args.datetime = (now - datetime.timedelta(date_step)).strftime('%Y%m%d%H%M') 
+    elif args.datetime.endswith('h'):
+        date_step = int(args.datetime.strip('h'))
+        args.datetime = (now - datetime.timedelta(0,3600*date_step)).strftime('%Y%m%d%H%M') 
+    else:
+        datetime.datetime.strptime(args.datetime, args.DATEFORMAT)
     if args.action == 'load':
         if not args.pathformat:
             print "-f is required"
