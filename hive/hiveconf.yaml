@@ -1,5 +1,5 @@
 hive:
     #lib:    '/data/hive/lib/py'
     lib:    '/Volumes/data/bigdata/hive-0.9.0/lib/py'
-    host:   "10.10.131.224"
+    host:   "10.150.140.68"
     port:   10000

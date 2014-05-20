@@ -21,6 +21,7 @@ manage hive table""",
       scripts = ['scripts/hiveload.py'],
       install_requires=[
           # -*- Extra requirements: -*-
+        'hive-thrift-py >= 0.0.1'
       ],
       entry_points="""
       # -*- Entry points: -*-

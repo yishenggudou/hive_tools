@@ -55,9 +55,9 @@ class Table(Hive):
         else:
             partition_str = ''
         if partition_str:
-            hsql = "load data inpath '{hadoop_dir}' into table {table} PARTITION {partition}"
+            hsql = "load data  LOCAL  inpath '{hadoop_dir}' into table {table} PARTITION {partition}"
         else:
-            hsql = "load data inpath '{hadoop_dir}' into table {table}"
+            hsql = "load data  LOCAL  inpath '{hadoop_dir}' into table {table}"
         hadoop_dir = self.render_time_str(dir_format, ptime)
         hsql = hsql.format(hadoop_dir=hadoop_dir,
                            table=self.tablename,
@@ -67,7 +67,7 @@ class Table(Hive):
         resutes = self._exec(hsql)
         if resutes is None:
             print "No Retuen Row"
-            return 
+            return
         for l in resutes:
             print l
         if resutes:
